@@ -34,7 +34,8 @@ namespace craftersmine.MinecraftLauncher2.Core
             launchedProcess.EnableRaisingEvents = true;
             launchedProcess.Exited += processExited;
             launchedProcess.OutputDataReceived += processOutDataReceived;
-            launchedProcess.StartInfo.UseShellExecute = true;
+            launchedProcess.StartInfo.UseShellExecute = false;
+            launchedProcess.StartInfo.WorkingDirectory = clientDir;
             launchedProcess.StartInfo.RedirectStandardOutput = false;
             launchedProcess.Start();
             //launchedProcess.WaitForExit();
@@ -55,6 +56,7 @@ namespace craftersmine.MinecraftLauncher2.Core
 
             string launchString = launchArgs;
 
+            launchString = "-Duser.dir=\"" + clientRoot + "\" " + launchString;
             launchString = launchString.Replace("{%CLIENTROOT%}", clientRoot);
             launchString = launchString.Replace("{%MAXALLOCATEDMEM%}", allocatedMem.ToString());
             launchString = launchString.Replace("{%NATIVESDIR%}", nativesPath);
