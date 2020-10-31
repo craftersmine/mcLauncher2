@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using craftersmine.MinecraftLauncher2.Extensions;
 using System.IO;
 using craftersmine.MinecraftLauncher2.Exceptions;
+using craftersmine.MinecraftLauncher2.Properties;
 
 namespace craftersmine.MinecraftLauncher2
 {
@@ -20,6 +21,8 @@ namespace craftersmine.MinecraftLauncher2
         {
             try
             {
+                Settings.Default.Upgrade();
+
                 new Logger(Environment.GetEnvironmentVariable("TEMP"), "MCLAUNCHER");
                 if (SettingsManager.DownloadedContentStorage.IsNullEmptyOrWhitespace())
                     SettingsManager.DownloadedContentStorage = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), ".craftersmine\\MinecraftLauncher");
